@@ -35,6 +35,7 @@ def insertion_sort(arr):
 
 def merge_sort(arr):
     """Merge Sorting Algorithm"""
+    
     if len(arr) > 1:
         mid = len(arr) // 2
         L = arr[:mid]
@@ -139,6 +140,7 @@ if __name__ == "__main__":
     # insertion_sort(sample_array)
     # merge_sort(sample_array)
     # quick_sort(sample_array)
+    # shail merge 
     # heap_sort(sample_array)
     sorted_array = merge_sort(sample_array)
 
