@@ -24,7 +24,7 @@ def insertion_sort(arr):
     pass
 
 def merge_sort(arr):
-    """Merge Sort Algorithm"""
+    """Merge Sorting Algorithm"""
     if len(arr) > 1:
         mid = len(arr) // 2
         L = arr[:mid]
