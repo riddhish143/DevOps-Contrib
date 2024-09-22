@@ -34,7 +34,7 @@ def insertion_sort(arr):
     return arr
 
 def merge_sort(arr):
-    """Merge Sort Algorithm"""
+    """Merge Sorting Algorithm"""
     if len(arr) > 1:
         mid = len(arr) // 2
         L = arr[:mid]
