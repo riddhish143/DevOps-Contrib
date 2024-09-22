@@ -35,6 +35,7 @@ def insertion_sort(arr):
 
 def merge_sort(arr):
     """Merge Sorting Algorithm"""
+    
     if len(arr) > 1:
         mid = len(arr) // 2
         L = arr[:mid]
@@ -171,6 +172,21 @@ def get_array_input():
 
 # Example usage
 if __name__ == "__main__":
+
+    sample_array = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.55, 0.88, 0.99]
+    
+    # Uncomment the sorting function you want to test
+    # bubble_sort(sample_array)
+    # selection_sort(sample_array)
+    # insertion_sort(sample_array)
+    # merge_sort(sample_array)
+    # quick_sort(sample_array)
+    # shail merge 
+    # heap_sort(sample_array)
+    sorted_array = merge_sort(sample_array)
+
+    
+    print("Sorted array:", sorted_array)
     sample_array = get_array_input()
     choice = get_algorithm_choice()
 
@@ -195,3 +211,4 @@ if __name__ == "__main__":
 
     if sorted_array is not None:
         print("Sorted array:", sorted_array)
+
