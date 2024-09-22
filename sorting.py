@@ -106,32 +106,73 @@ def counting_sort(arr):
     return output_array
 
 
-def bucket_sort(array):
-    """Bucket Sort Algorithm"""
-    if len(array) == 0:
-        return array
+# Radix sort in Python
+# Using counting sort to sort the elements in the basis of significant places
+def countingSort(array, place):
+    size = len(array)
+    output = [0] * size
+    count = [0] * 10
 
-    # Create empty buckets
-    bucket_count = 10  # Number of buckets
-    buckets = [[] for _ in range(bucket_count)]
+    # Calculate count of elements
+    for i in range(0, size):
+        index = array[i] // place
+        count[index % 10] += 1
 
-    # Insert elements into their respective buckets
-    for j in array:
-        index_b = int(bucket_count * j)  # Adjusted for float values
-        if index_b == bucket_count:  # Handle the case where j is 1.0
-            index_b -= 1
-        buckets[index_b].append(j)
+    # Calculate cumulative count
+    for i in range(1, 10):
+        count[i] += count[i - 1]
 
-    # Sort the elements of each bucket
-    sorted_array = []
-    for bucket in buckets:
-        sorted_array.extend(sorted(bucket))  # Sort each bucket
+    # Place the elements in sorted order
+    i = size - 1
+    while i >= 0:
+        index = array[i] // place
+        output[count[index % 10] - 1] = array[i]
+        count[index % 10] -= 1
+        i -= 1
 
-    return sorted_array
+    for i in range(0, size):
+        array[i] = output[i]
+
+
+# Main function to implement radix sort
+def radix_sort(array):
+    # Get maximum element
+    max_element = max(array)
+
+    # Apply counting sort to sort elements based on place value.
+    place = 1
+    while max_element // place > 0:
+        countingSort(array, place)
+        place *= 10
+    
+    return array
+
+
+def get_algorithm_choice():
+    """Get user choice for sorting algorithm."""
+    print("Choose a sorting algorithm:")
+    print("1. Bubble Sort")
+    print("2. Selection Sort")
+    print("3. Insertion Sort")
+    print("4. Merge Sort")
+    print("5. Quick Sort")
+    print("6. Heap Sort")
+    print("7. Radix Sort")
+   
+    choice = input("Enter the number of the algorithm: ")
+    return choice
+
+
+def get_array_input():
+    """Get array input from the user."""
+    arr = input("Enter the array elements separated by spaces (e.g., 0.78 0.17 0.39): ")
+    arr = list(map(int, arr.split()))
+    return arr
 
 
 # Example usage
 if __name__ == "__main__":
+
     sample_array = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.55, 0.88, 0.99]
     
     # Uncomment the sorting function you want to test
@@ -146,3 +187,28 @@ if __name__ == "__main__":
 
     
     print("Sorted array:", sorted_array)
+    sample_array = get_array_input()
+    choice = get_algorithm_choice()
+
+    # Sorting based on user's choice
+    if choice == "1":
+        sorted_array = bubble_sort(sample_array)
+    elif choice == "2":
+        sorted_array = selection_sort(sample_array)
+    elif choice == "3":
+        sorted_array = insertion_sort(sample_array)
+    elif choice == "4":
+        sorted_array = merge_sort(sample_array)
+    elif choice == "5":
+        sorted_array = quick_sort(sample_array)
+    elif choice == "6":
+        sorted_array = heap_sort(sample_array)
+    elif choice == "7":
+        sorted_array = radix_sort(sample_array)
+    else:
+        print("Invalid choice! Exiting.")
+        sorted_array = None
+
+    if sorted_array is not None:
+        print("Sorted array:", sorted_array)
+
