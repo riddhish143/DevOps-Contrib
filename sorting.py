@@ -7,7 +7,6 @@ def bubble_sort(arr):
                 arr[j], arr[j+1] = arr[j+1], arr[j]
     return arr
 
-
 def selection_sort(arr):
     n = len(arr)
     for i in range(n):
@@ -65,9 +64,7 @@ def merge_sort(arr):
             k += 1
     return arr
     
-
-
-def quicksort(arr):
+def quick_sort(arr):
 
   if len(arr) <= 1:
     return arr
@@ -77,13 +74,7 @@ def quicksort(arr):
   middle = [x for x in arr if x == pivot]
   right = [x for x in arr if x > pivot]
 
-  return quicksort(left) + middle + quicksort(right)
-
-
-def heap_sort(arr):
-    """Heap Sort Algorithm"""
-    pass
-
+  return quick_sort(left) + middle + quick_sort(right)
 
 def counting_sort(arr):
     """Counting Sort Algorithm"""
@@ -104,7 +95,6 @@ def counting_sort(arr):
         count_array[arr[i]] -= 1
 
     return output_array
-
 
 # Radix sort in Python
 # Using counting sort to sort the elements in the basis of significant places
@@ -133,7 +123,6 @@ def countingSort(array, place):
     for i in range(0, size):
         array[i] = output[i]
 
-
 # Main function to implement radix sort
 def radix_sort(array):
     # Get maximum element
@@ -146,7 +135,6 @@ def radix_sort(array):
         place *= 10
     
     return array
-
 
 def get_algorithm_choice():
     """Get user choice for sorting algorithm."""
@@ -162,13 +150,47 @@ def get_algorithm_choice():
     choice = input("Enter the number of the algorithm: ")
     return choice
 
-
 def get_array_input():
     """Get array input from the user."""
     arr = input("Enter the array elements separated by spaces (e.g., 0.78 0.17 0.39): ")
     arr = list(map(int, arr.split()))
     return arr
 
+def heapify(arr, n, i):
+    """Helper function to maintain the heap property"""
+    largest = i  # Initialize largest as root
+    left = 2 * i + 1  # left child
+    right = 2 * i + 2  # right child
+
+    # If left child is larger than root
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+
+    # If right child is larger than largest so far
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+
+    # If largest is not root
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]  # Swap
+
+        # Recursively heapify the affected sub-tree
+        heapify(arr, n, largest)
+
+def heap_sort(arr):
+    """Heap Sort Algorithm"""
+    n = len(arr)
+
+    # Build a maxheap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    # Extract elements one by one from heap
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]  # Swap
+        heapify(arr, i, 0)
+
+    return arr
 
 # Example usage
 if __name__ == "__main__":
